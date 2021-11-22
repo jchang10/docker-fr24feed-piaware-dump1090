@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.24.0 (4a2a0458)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: fr24feed-piaware
+  name: fr24feed-piaware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: fr24feed-piaware
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.24.0 (4a2a0458)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: fr24feed-piaware
+    spec:
+      containers:
+        - env:
+            - name: FR24FEED_FR24KEY
+              value: 6a011a367ce74815
+            - name: HTML_DEFAULT_TRACKER
+              value: Flightradar24
+            - name: HTML_FR24_FEEDER_STATUS_PAGE
+              value: http://raspberrypi:8754/
+            - name: HTML_RECEIVER_STATS_PAGE_FLIGHTAWARE
+              value: https://flightaware.com/adsb/stats/user/
+            - name: HTML_RECEIVER_STATS_PAGE_FLIGHTRADAR24
+              value: https://www.flightradar24.com/account/feed-stats/?id=17995
+            - name: HTML_SITE_LAT
+              value: "37.74461"
+            - name: HTML_SITE_LON
+              value: "-122.42568"
+            - name: HTML_SITE_NAME
+              value: MY_SITE_NAME
+            - name: PANORAMA_ID
+              value: MY_PANORAMA_ID
+            - name: PIAWARE_FEEDER_DASH_ID
+              value: a4abd523-354a-4496-9305-ac3e24a12566
+          image: thomx/fr24feed-piaware
+          name: fr24feed-piaware
+          ports:
+            - containerPort: 8754
+            - containerPort: 8080
+          resources: {}
+          volumeMounts:
+          - mountPath: /dev/bus/usb
+            name: dev-bus
+          securityContext:
+            privileged: true
+
+      volumes:
+      - name: dev-bus
+        hostPath:
+          path: /dev/bus/usb
+
+      restartPolicy: Always
+status: {}

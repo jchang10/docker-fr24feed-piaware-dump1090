@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.24.0 (4a2a0458)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: fr24feed-piaware
+  name: fr24feed-piaware
+spec:
+  selector:
+    io.kompose.service: fr24feed-piaware
+  ports:
+    - name: "8754"
+      port: 8754
+      targetPort: 8754
+    - name: "skyview"
+      port: 8080
+      targetPort: 8080
+status:
+  loadBalancer: {}
+
