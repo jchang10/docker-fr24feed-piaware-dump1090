@@ -1,0 +1,24 @@
+apiVersion: skaffold/v2beta9
+kind: Config
+metadata:
+  name: scidw
+build:
+  # googleCloudBuild:
+  #   projectId: gred-ptddtalak-sb-001-e4372d8c      
+  # local:
+  #   tryImportMissing: true
+  artifacts:
+  - image: gcr.io/gred-ptddtalak-sb-001-e4372d8c/changj50/scidw/django/dev
+    context: ../../../scidw
+# Dont do jupyter by default
+# - image: gcr.io/gred-ptddtalak-sb-001-e4372d8c/changj50/scidw/jupyter/dev
+#     context: ../../../scidw
+#     docker:
+#       dockerfile: Dockerfile.jupyter
+#     requires:
+#       - image: gcr.io/gred-ptddtalak-sb-001-e4372d8c/changj50/scidw/django/dev
+#         alias: BASE
+deploy:
+  kustomize:
+    defaultNamespace: eticket-gcp-7274-dev
+

@@ -1,0 +1,18 @@
+# bases:
+# - ../gcp-predev
+# - ../../base/django
+# - ../../base/django-process-tasks
+
+images:
+  - name: thomx/fr24feed-piaware
+
+# resources:
+# - rbac.yml
+# - services.yml
+
+# replicas:
+#   - name: scidw-django
+#     count: 3
+    
+
+
